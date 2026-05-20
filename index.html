@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfect Score — SKILLS Realtalk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@500;600&family=Lato:ital,wght@0,400;0,700;1,400;1,500&display=swap" rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #1a1a1a;
+      font-family: "Lato", sans-serif;
+      padding: 16px;
+    }
+
+    .preview {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+      max-width: 393px;
+    }
+
+    .preview__title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #e6e6e6;
+      letter-spacing: 0.02em;
+    }
+
+    .preview__nav {
+      display: flex;
+      gap: 12px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .preview__btn {
+      flex: 1;
+      max-width: 160px;
+      padding: 14px 24px;
+      font-family: "Cabin", sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #e6e6e6;
+      background: #1a1a1a;
+      border: 1px solid #787878;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: background 0.15s ease, opacity 0.15s ease;
+    }
+
+    .preview__btn:hover:not(:disabled) {
+      background: #222;
+    }
+
+    .preview__btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .screen {
+      display: none;
+      width: 100%;
+    }
+
+    .screen--visible {
+      display: block;
+    }
+
+    .screen__content--eval {
+      justify-content: center;
+      padding: 24px;
+    }
+
+    /* Screen 2 — Evaluation card module (Figma 507:1512) */
+    .eval-module {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 345px;
+    }
+
+    .eval-module .eval-card:nth-child(1) {
+      --eval-stagger: 0s;
+    }
+    .eval-module .eval-card:nth-child(2) {
+      --eval-stagger: 2.28s;
+    }
+    .eval-module .eval-card:nth-child(3) {
+      --eval-stagger: 4.56s;
+    }
+
+    .eval-card {
+      position: relative;
+      width: 100%;
+      height: 83px;
+      background: linear-gradient(to top, #141414 14.545%, #1a1a1a 100%);
+      border: 1px solid #2b2b2b;
+      border-radius: 13px;
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+      overflow: visible;
+    }
+
+    .eval-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -1px;
+      right: -1px;
+      height: 28px;
+      border-top: 1px solid #4d4d4d;
+      border-radius: 13px 13px 0 0;
+      pointer-events: none;
+    }
+
+    .eval-card__row {
+      display: flex;
+      align-items: center;
+      padding: 19px 48px 0 17px;
+    }
+
+    .eval-card__label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .eval-card__icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .eval-card__name {
+      font-family: "Cabin", sans-serif;
+      font-size: 18px;
+      font-weight: 500;
+      color: #e6e6e6;
+      white-space: nowrap;
+    }
+
+    .eval-card__chevron {
+      position: absolute;
+      right: 22px;
+      top: 50%;
+      width: 22px;
+      height: 22px;
+      transform: translateY(-50%) rotate(-90deg);
+    }
+
+    .eval-card__rating {
+      position: relative;
+      margin: 6px 0 0 17px;
+      width: 174px;
+      height: 24px;
+    }
+
+    .eval-dot {
+      position: absolute;
+      top: 5px;
+      width: 18px;
+      height: 18px;
+      background: #1a1a1a;
+      border: 1px solid #303030;
+      border-radius: 6px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .eval-dot--1 { left: 0; }
+    .eval-dot--2 { left: 22px; }
+    .eval-dot--3 { left: 44px; }
+    .eval-dot--4 { left: 66px; }
+    .eval-dot--5 { left: 88px; }
+
+    .eval-dot__fill {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+      transform: scale(0);
+      opacity: 0;
+    }
+
+    .eval-dot__fill--red {
+      background: #ff6d68;
+    }
+
+    .eval-dot__fill--green {
+      background: #2ce080;
+    }
+
+    .eval-dot--glow {
+      position: relative;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    .eval-card__status {
+      position: absolute;
+      left: 112px;
+      top: 5px;
+      font-family: "Lato", sans-serif;
+      font-size: 14px;
+      font-style: italic;
+      font-weight: 500;
+      color: #2ce080;
+      text-shadow: 0 0 8px rgba(44, 224, 128, 0.25);
+      white-space: nowrap;
+      line-height: normal;
+      opacity: 0;
+    }
+
+    .eval-card--proficient .eval-card__status {
+      color: #e6e6e6;
+      text-shadow: none;
+    }
+
+    .eval-card--proficient .eval-card__sparkle {
+      display: none;
+    }
+
+    .eval-card__sparkle {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    @keyframes dot-fill-pop {
+      0% {
+        opacity: 0;
+        transform: scale(0);
+      }
+      60% {
+        opacity: 1;
+        transform: scale(1.15);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes dot-glow-pulse {
+      0% {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+      }
+      100% {
+        box-shadow: 0 0 8px rgba(44, 224, 128, 0.35);
+      }
+    }
+
+    /* Travel from 5th green point, then grow–shrink at landing */
+    @keyframes eval-sparkle-eject {
+      0% {
+        opacity: 0;
+        transform: translate(calc(97px - var(--x)), calc(14px - var(--y))) scale(0.4);
+      }
+      38% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+      }
+      52% {
+        transform: translate(0, 0) scale(1.4);
+      }
+      68% {
+        transform: translate(0, 0) scale(0.82);
+      }
+      84% {
+        transform: translate(0, 0) scale(1.12);
+      }
+      100% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+      }
+    }
+
+    @keyframes eval-status-in {
+      0% {
+        opacity: 0;
+        transform: translateX(6px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .eval-card--animate .eval-dot--1 .eval-dot__fill {
+      animation: dot-fill-pop 0.26s cubic-bezier(0.34, 1.35, 0.64, 1) calc(0.2s + var(--eval-stagger, 0s)) forwards;
+    }
+    .eval-card--animate .eval-dot--2 .eval-dot__fill {
+      animation: dot-fill-pop 0.26s cubic-bezier(0.34, 1.35, 0.64, 1) calc(0.4s + var(--eval-stagger, 0s)) forwards;
+    }
+    .eval-card--animate .eval-dot--3 .eval-dot__fill {
+      animation: dot-fill-pop 0.26s cubic-bezier(0.34, 1.35, 0.64, 1) calc(0.6s + var(--eval-stagger, 0s)) forwards;
+    }
+    .eval-card--animate .eval-dot--4 .eval-dot__fill {
+      animation: dot-fill-pop 0.26s cubic-bezier(0.34, 1.35, 0.64, 1) calc(0.8s + var(--eval-stagger, 0s)) forwards;
+    }
+    .eval-card--animate .eval-dot--5 .eval-dot__fill {
+      animation: dot-fill-pop 0.26s cubic-bezier(0.34, 1.35, 0.64, 1) calc(1s + var(--eval-stagger, 0s)) forwards;
+    }
+    /* Glow after sparkles finish their grow–shrink */
+    .eval-card--animate .eval-dot--5 {
+      animation: dot-glow-pulse 0.32s ease-out calc(1.88s + var(--eval-stagger, 0s)) forwards;
+    }
+    .eval-card--animate .eval-card__sparkle--1 {
+      --x: 86px;
+      --y: -1px;
+      animation: eval-sparkle-eject 0.44s cubic-bezier(0.33, 1.1, 0.45, 1) calc(1.28s + var(--eval-stagger, 0s)) forwards;
+    }
+    .eval-card--animate .eval-card__sparkle--2 {
+      --x: 101px;
+      --y: 19px;
+      animation: eval-sparkle-eject 0.44s cubic-bezier(0.33, 1.1, 0.45, 1) calc(1.36s + var(--eval-stagger, 0s)) forwards;
+    }
+    .eval-card--animate .eval-card__status {
+      animation: eval-status-in 0.32s ease-out calc(1.88s + var(--eval-stagger, 0s)) forwards;
+    }
+
+    .eval-card--proficient.eval-card--animate .eval-dot--5 .eval-dot__fill,
+    .eval-card--proficient.eval-card--animate .eval-dot--5,
+    .eval-card--proficient.eval-card--animate .eval-card__sparkle--1,
+    .eval-card--proficient.eval-card--animate .eval-card__sparkle--2 {
+      animation: none;
+    }
+
+    .eval-card--proficient.eval-card--animate .eval-card__status {
+      animation: eval-status-in 0.32s ease-out calc(1.05s + var(--eval-stagger, 0s)) forwards;
+    }
+
+    .eval-card__sparkle--1 {
+      left: 86px;
+      top: -1px;
+      width: 9px;
+      height: 9px;
+    }
+
+    .eval-card__sparkle--2 {
+      left: 101px;
+      top: 19px;
+      width: 6px;
+      height: 6px;
+    }
+
+    .screen-inner {
+      position: relative;
+      width: 100%;
+      max-width: 393px;
+      min-height: 852px;
+      background: #0d0d0d;
+      border-radius: 40px;
+      overflow: hidden;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+    }
+
+    .screen__chevron {
+      position: absolute;
+      left: 50%;
+      width: 852px;
+      height: 288px;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .screen__chevron--top {
+      top: -80px;
+      transform: translateX(-50%) rotate(-90deg);
+    }
+
+    .screen__chevron--bottom {
+      top: 635px;
+      transform: translateX(-50%) rotate(90deg);
+    }
+
+    .screen__chevron img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .screen__content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 852px;
+      padding: 24px;
+    }
+
+    .card {
+      position: relative;
+      width: 345px;
+      height: 163px;
+      background: #141414;
+      border: 2px solid rgba(255, 225, 68, 0.2);
+      border-radius: 20px;
+      flex-shrink: 0;
+    }
+
+    /* Full border after fifth star + sparkles; pulse thicker outward, then settle */
+    @keyframes card-border-reveal {
+      0% {
+        border-color: rgba(255, 225, 68, 0.2);
+        box-shadow: 0 0 0 0 rgba(255, 225, 68, 0);
+      }
+      32% {
+        border-color: #ffe144;
+        box-shadow: 0 0 0 0 rgba(255, 225, 68, 0);
+      }
+      52% {
+        border-color: #ffe144;
+        box-shadow: 0 0 0 4px #ffe144;
+      }
+      72% {
+        border-color: #ffe144;
+        box-shadow: 0 0 0 1px #ffe144;
+      }
+      100% {
+        border-color: #ffe144;
+        box-shadow: none;
+      }
+    }
+
+    /* Star row timing — last sparkle ends at 2.44s + 0.38s */
+    .screen--animate {
+      --star-sparkle-end: 2.82s;
+      --border-reveal-dur: 0.55s;
+    }
+
+    .card.card--animate {
+      animation: card-border-reveal var(--border-reveal-dur) ease-out var(--star-sparkle-end) forwards;
+    }
+
+    .card__title {
+      position: absolute;
+      left: 50%;
+      top: 18px;
+      transform: translateX(-50%);
+      font-size: 20px;
+      font-weight: 700;
+      line-height: normal;
+      color: #e6e6e6;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .card__divider {
+      position: absolute;
+      left: 14px;
+      top: 50px;
+      width: 317px;
+      height: 2px;
+      background: rgba(255, 214, 69, 0.8);
+      border-radius: 99px;
+    }
+
+    /* Figma 505:1392 */
+    .rating {
+      position: absolute;
+      left: 50%;
+      top: 67px;
+      transform: translateX(-50%);
+      width: 232px;
+      height: 37px;
+    }
+
+    .rating__star {
+      position: absolute;
+      top: 1px;
+      width: 26px;
+      height: 26px;
+      opacity: 0;
+      transform: scale(0) rotate(-30deg);
+      transform-origin: center center;
+    }
+
+    .rating__star img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .rating__star--1 { left: 0; }
+    .rating__star--2 { left: 34px; }
+    .rating__star--3 { left: 68px; }
+    .rating__star--4 { left: 102px; }
+
+    /* Figma fifth star frame 505:1455 */
+    .star-fifth {
+      position: absolute;
+      left: 130px;
+      top: -1px;
+      width: 39px;
+      height: 37px;
+    }
+
+    .star-fifth__core {
+      position: absolute;
+      left: 6px;
+      top: 2px;
+      width: 26px;
+      height: 26px;
+      opacity: 0;
+      transform: scale(0) rotate(-30deg);
+      transform-origin: center center;
+    }
+
+    .star-fifth__core img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .star-fifth__sparkle {
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      width: var(--size);
+      height: var(--size);
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0) rotate(var(--rot));
+      /* Teardrop visual mass sits slightly left-below geometric center */
+      transform-origin: 54% 62%;
+      pointer-events: none;
+    }
+
+    .rating__separator {
+      position: absolute;
+      left: 182px;
+      top: 50%;
+      transform: translateY(-50%) scaleY(0);
+      transform-origin: center center;
+      width: 2px;
+      height: 28px;
+      background: #2b2b2b;
+      border-radius: 5px;
+      opacity: 0;
+    }
+
+    .rating__check {
+      position: absolute;
+      left: 204px;
+      top: 0;
+      width: 28px;
+      height: 28px;
+      opacity: 0;
+      transform: scale(0);
+      transform-origin: center center;
+    }
+
+    .rating__check img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .card__message {
+      position: absolute;
+      left: 50%;
+      top: 111px;
+      transform: translateX(-50%);
+      width: 283px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: normal;
+      color: #e6e6e6;
+      text-align: center;
+      opacity: 0;
+    }
+
+    .btn-feedback {
+      margin-top: 28px;
+      padding: 19px 44px;
+      font-family: "Cabin", sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: normal;
+      color: #e6e6e6;
+      background: #1a1a1a;
+      border: 1px solid #787878;
+      border-radius: 99px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    .btn-feedback:hover {
+      background: #222;
+    }
+
+    /* Star fill-in: 0 → 5 */
+    @keyframes star-pop {
+      0% {
+        opacity: 0;
+        transform: scale(0) rotate(-30deg);
+      }
+      55% {
+        opacity: 1;
+        transform: scale(1.2) rotate(8deg);
+      }
+      100% {
+        opacity: 0.9;
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
+    /* Sparkles eject from star center — origin measured from Figma export */
+    @keyframes sparkle-eject {
+      0% {
+        opacity: 0;
+        transform: translate(calc(19px - var(--x)), calc(15px - var(--y)))
+          translate(-50%, -50%) scale(0) rotate(var(--rot));
+      }
+      55% {
+        opacity: 1;
+        transform: translate(calc(19px - var(--x)), calc(15px - var(--y)))
+          translate(-50%, -50%) scale(1.15) rotate(var(--rot));
+      }
+      100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1) rotate(var(--rot));
+      }
+    }
+
+    @keyframes fade-scale-in {
+      0% {
+        opacity: 0;
+        transform: scale(0);
+      }
+      70% {
+        opacity: 1;
+        transform: scale(1.08);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes separator-grow {
+      0% {
+        opacity: 0;
+        transform: translateY(-50%) scaleY(0);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(-50%) scaleY(1);
+      }
+    }
+
+    @keyframes fade-up {
+      0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(6px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    .rating--animate .rating__star--1 {
+      animation: star-pop 0.45s cubic-bezier(0.34, 1.4, 0.64, 1) 0.2s forwards;
+    }
+    .rating--animate .rating__star--2 {
+      animation: star-pop 0.45s cubic-bezier(0.34, 1.4, 0.64, 1) 0.55s forwards;
+    }
+    .rating--animate .rating__star--3 {
+      animation: star-pop 0.45s cubic-bezier(0.34, 1.4, 0.64, 1) 0.9s forwards;
+    }
+    .rating--animate .rating__star--4 {
+      animation: star-pop 0.45s cubic-bezier(0.34, 1.4, 0.64, 1) 1.25s forwards;
+    }
+    .rating--animate .star-fifth__core {
+      animation: star-pop 0.45s cubic-bezier(0.34, 1.4, 0.64, 1) 1.6s forwards;
+    }
+    .rating--animate .star-fifth__sparkle--1 {
+      animation: sparkle-eject 0.38s cubic-bezier(0.22, 1.3, 0.36, 1) 2.12s forwards;
+    }
+    .rating--animate .star-fifth__sparkle--2 {
+      animation: sparkle-eject 0.38s cubic-bezier(0.22, 1.3, 0.36, 1) 2.2s forwards;
+    }
+    .rating--animate .star-fifth__sparkle--3 {
+      animation: sparkle-eject 0.38s cubic-bezier(0.22, 1.3, 0.36, 1) 2.28s forwards;
+    }
+    .rating--animate .star-fifth__sparkle--4 {
+      animation: sparkle-eject 0.38s cubic-bezier(0.22, 1.3, 0.36, 1) 2.36s forwards;
+    }
+    .rating--animate .star-fifth__sparkle--5 {
+      animation: sparkle-eject 0.38s cubic-bezier(0.22, 1.3, 0.36, 1) 2.44s forwards;
+    }
+    .rating--animate .rating__separator {
+      animation: separator-grow 0.3s ease-out calc(var(--star-sparkle-end) + var(--border-reveal-dur) + 0.08s) forwards;
+    }
+    .rating--animate .rating__check {
+      animation: fade-scale-in 0.4s cubic-bezier(0.34, 1.3, 0.64, 1) calc(var(--star-sparkle-end) + var(--border-reveal-dur) + 0.28s) forwards;
+    }
+
+    .card--animate .card__message {
+      animation: fade-up 0.5s ease-out calc(var(--star-sparkle-end) + var(--border-reveal-dur) + 0.53s) forwards;
+    }
+
+    .screen--animate .btn-feedback {
+      animation: fade-up-btn 0.45s ease-out calc(var(--star-sparkle-end) + var(--border-reveal-dur) + 0.83s) forwards;
+    }
+
+    @keyframes fade-up-btn {
+      0% {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card.card--animate {
+        animation: none !important;
+        border-color: #ffe144 !important;
+        box-shadow: none !important;
+      }
+      .rating__star,
+      .rating__separator,
+      .rating__check,
+      .card__message,
+      .btn-feedback,
+      .star-fifth__core,
+      .star-fifth__sparkle {
+        animation: none !important;
+        opacity: 1 !important;
+      }
+      .rating__star,
+      .star-fifth__core {
+        transform: none !important;
+      }
+      .star-fifth__sparkle {
+        transform: translate(-50%, -50%) !important;
+      }
+      .eval-card--animate .eval-dot__fill,
+      .eval-card--animate .eval-card__sparkle,
+      .eval-card--animate .eval-card__status {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .eval-card--animate .eval-dot--5.eval-dot--glow {
+        box-shadow: 0 0 8px rgba(44, 224, 128, 0.35) !important;
+      }
+      .rating__separator {
+        transform: translateY(-50%) !important;
+      }
+      .rating__check {
+        transform: none !important;
+      }
+      .card__message {
+        transform: translateX(-50%) !important;
+      }
+      .btn-feedback {
+        transform: none !important;
+      }
+      .rating__separator {
+        transform: translateY(-50%) !important;
+      }
+      .card__message {
+        transform: translateX(-50%) !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="preview">
+    <h1 class="preview__title" id="preview-title">Mobile #1</h1>
+
+    <!-- Mobile #1 — perfect score screen -->
+    <div class="screen screen--visible screen--animate" data-phone="1" data-node-id="505:1375">
+      <div class="screen-inner">
+    <div class="screen__chevron screen__chevron--top" aria-hidden="true">
+      <img src="assets/chevron-top.png" alt="" width="288" height="852" />
+    </div>
+    <div class="screen__chevron screen__chevron--bottom" aria-hidden="true">
+      <img src="assets/chevron-bottom.png" alt="" width="288" height="852" />
+    </div>
+
+    <main class="screen__content">
+      <article class="card card--animate" data-node-id="505:1388">
+        <h1 class="card__title" data-node-id="505:1390">Reviving a cold lead</h1>
+        <div class="card__divider" role="presentation" data-node-id="505:1391"></div>
+
+        <div class="rating rating--animate" data-node-id="505:1392" aria-label="Rating animating to 5 stars">
+          <div class="rating__star rating__star--1" aria-hidden="true">
+            <img src="assets/star.svg" alt="" />
+          </div>
+          <div class="rating__star rating__star--2" aria-hidden="true">
+            <img src="assets/star.svg" alt="" />
+          </div>
+          <div class="rating__star rating__star--3" aria-hidden="true">
+            <img src="assets/star.svg" alt="" />
+          </div>
+          <div class="rating__star rating__star--4" aria-hidden="true">
+            <img src="assets/star.svg" alt="" />
+          </div>
+          <div class="star-fifth" aria-hidden="true" data-node-id="505:1484">
+            <div class="star-fifth__core">
+              <img src="assets/star.svg" alt="" />
+            </div>
+            <!-- Positions measured from Figma export (star-fifth-ref.png) -->
+            <img
+              class="star-fifth__sparkle star-fifth__sparkle--1"
+              src="assets/sparkle.svg"
+              alt=""
+              style="--x: 28.35px; --y: 4.02px; --rot: -3.32deg; --size: 6.5px"
+            />
+            <img
+              class="star-fifth__sparkle star-fifth__sparkle--2"
+              src="assets/sparkle.svg"
+              alt=""
+              style="--x: 9.39px; --y: 4.36px; --rot: -84.22deg; --size: 6.5px"
+            />
+            <img
+              class="star-fifth__sparkle star-fifth__sparkle--3"
+              src="assets/sparkle.svg"
+              alt=""
+              style="--x: 4.71px; --y: 21.85px; --rot: -163.97deg; --size: 7px"
+            />
+            <img
+              class="star-fifth__sparkle star-fifth__sparkle--4"
+              src="assets/sparkle.svg"
+              alt=""
+              style="--x: 33.16px; --y: 21px; --rot: 67.98deg; --size: 7px"
+            />
+            <img
+              class="star-fifth__sparkle star-fifth__sparkle--5"
+              src="assets/sparkle.svg"
+              alt=""
+              style="--x: 18.96px; --y: 31.51px; --rot: 135.49deg; --size: 7.5px"
+            />
+          </div>
+
+          <span class="rating__separator" aria-hidden="true" data-node-id="505:1397"></span>
+          <div class="rating__check" data-node-id="505:1398">
+            <img src="assets/check.svg" alt="Completed" />
+          </div>
+        </div>
+
+        <p class="card__message" data-node-id="505:1389">
+          5/5 stars! Congrats on getting perfected! Keep up the good work!
+        </p>
+      </article>
+
+      <button type="button" class="btn-feedback" data-node-id="505:1419">
+        View personalized feedback
+      </button>
+    </main>
+      </div>
+    </div>
+
+    <!-- Mobile #2 — Evaluation card (Figma 507:1512) -->
+    <div class="screen" data-phone="2" data-node-id="507:1512" hidden>
+      <div class="screen-inner">
+        <div class="screen__chevron screen__chevron--top" aria-hidden="true">
+          <img src="assets/chevron-top.png" alt="" width="288" height="852" />
+        </div>
+        <div class="screen__chevron screen__chevron--bottom" aria-hidden="true">
+          <img src="assets/chevron-bottom.png" alt="" width="288" height="852" />
+        </div>
+        <main class="screen__content screen__content--eval">
+          <div class="eval-module">
+            <article class="eval-card eval-card--animate" data-node-id="507:1512">
+              <div class="eval-card__row">
+                <div class="eval-card__label">
+                  <img class="eval-card__icon" src="assets/icon-list-check.svg" alt="" />
+                  <span class="eval-card__name">Product sales performance</span>
+                </div>
+              </div>
+              <img class="eval-card__chevron" src="assets/icon-chevron.svg" alt="" />
+              <div class="eval-card__rating">
+                <span class="eval-dot eval-dot--1"><span class="eval-dot__fill eval-dot__fill--green"></span></span>
+                <span class="eval-dot eval-dot--2"><span class="eval-dot__fill eval-dot__fill--green"></span></span>
+                <span class="eval-dot eval-dot--3"><span class="eval-dot__fill eval-dot__fill--green"></span></span>
+                <span class="eval-dot eval-dot--4"><span class="eval-dot__fill eval-dot__fill--green"></span></span>
+                <span class="eval-dot eval-dot--5 eval-dot--glow"><span class="eval-dot__fill eval-dot__fill--green"></span></span>
+                <img class="eval-card__sparkle eval-card__sparkle--1" src="assets/sparkle-green-2.svg" alt="" />
+                <img class="eval-card__sparkle eval-card__sparkle--2" src="assets/sparkle-green-1.svg" alt="" />
+                <p class="eval-card__status">“Excellent”</p>
+              </div>
+            </article>
+            <article class="eval-card eval-card--proficient eval-card--animate" data-node-id="281:602">
+              <div class="eval-card__row">
+                <div class="eval-card__label">
+                  <img class="eval-card__icon" src="assets/icon-list-check.svg" alt="" />
+                  <span class="eval-card__name">Product sales performance</span>
+                </div>
+              </div>
+              <img class="eval-card__chevron" src="assets/icon-chevron.svg" alt="" />
+              <div class="eval-card__rating">
+                <span class="eval-dot eval-dot--1"><span class="eval-dot__fill eval-dot__fill--green"></span></span>
+                <span class="eval-dot eval-dot--2"><span class="eval-dot__fill eval-dot__fill--green"></span></span>
+                <span class="eval-dot eval-dot--3"><span class="eval-dot__fill eval-dot__fill--green"></span></span>
+                <span class="eval-dot eval-dot--4"><span class="eval-dot__fill eval-dot__fill--green"></span></span>
+                <span class="eval-dot eval-dot--5"></span>
+                <p class="eval-card__status">“Proficient”</p>
+              </div>
+            </article>
+            <article class="eval-card eval-card--animate">
+              <div class="eval-card__row">
+                <div class="eval-card__label">
+                  <img class="eval-card__icon" src="assets/icon-list-check.svg" alt="" />
+                  <span class="eval-card__name">Product sales performance</span>
+                </div>
+              </div>
+              <img class="eval-card__chevron" src="assets/icon-chevron.svg" alt="" />
+              <div class="eval-card__rating">
+                <span class="eval-dot eval-dot--1"><span class="eval-dot__fill eval-dot__fill--green"></span></span>
+                <span class="eval-dot eval-dot--2"><span class="eval-dot__fill eval-dot__fill--green"></span></span>
+                <span class="eval-dot eval-dot--3"><span class="eval-dot__fill eval-dot__fill--green"></span></span>
+                <span class="eval-dot eval-dot--4"><span class="eval-dot__fill eval-dot__fill--green"></span></span>
+                <span class="eval-dot eval-dot--5 eval-dot--glow"><span class="eval-dot__fill eval-dot__fill--green"></span></span>
+                <img class="eval-card__sparkle eval-card__sparkle--1" src="assets/sparkle-green-2.svg" alt="" />
+                <img class="eval-card__sparkle eval-card__sparkle--2" src="assets/sparkle-green-1.svg" alt="" />
+                <p class="eval-card__status">“Excellent”</p>
+              </div>
+            </article>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <nav class="preview__nav" aria-label="Mobile preview navigation">
+      <button type="button" class="preview__btn" id="btn-back" disabled>Back</button>
+      <button type="button" class="preview__btn" id="btn-next">Next</button>
+    </nav>
+  </div>
+
+  <script>
+    const phones = Array.from(document.querySelectorAll(".screen[data-phone]"));
+    const titleEl = document.getElementById("preview-title");
+    const backBtn = document.getElementById("btn-back");
+    const nextBtn = document.getElementById("btn-next");
+    let currentIndex = 0;
+
+    function replayPhoneOneAnimation() {
+      const phone = phones[0];
+      const rating = phone.querySelector(".rating");
+      const card = phone.querySelector(".card");
+      if (!rating || !card) return;
+
+      rating.classList.remove("rating--animate");
+      card.classList.remove("card--animate");
+      phone.classList.remove("screen--animate");
+      void rating.offsetWidth;
+      phone.classList.add("screen--animate");
+      card.classList.add("card--animate");
+      rating.classList.add("rating--animate");
+    }
+
+    function showPhone(index) {
+      currentIndex = index;
+      phones.forEach((phone, i) => {
+        const visible = i === index;
+        phone.classList.toggle("screen--visible", visible);
+        phone.hidden = !visible;
+      });
+      titleEl.textContent = `Mobile #${index + 1}`;
+      backBtn.disabled = index === 0;
+      nextBtn.disabled = index === phones.length - 1;
+
+      if (index === 0) {
+        replayPhoneOneAnimation();
+      } else if (index === 1) {
+        replayPhoneTwoAnimation();
+      }
+    }
+
+    function replayPhoneTwoAnimation() {
+      const cards = phones[1]?.querySelectorAll(".eval-card");
+      if (!cards?.length) return;
+      cards.forEach((card) => card.classList.remove("eval-card--animate"));
+      void cards[0].offsetWidth;
+      cards.forEach((card) => card.classList.add("eval-card--animate"));
+    }
+
+    backBtn.addEventListener("click", () => {
+      if (currentIndex > 0) showPhone(currentIndex - 1);
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (currentIndex < phones.length - 1) showPhone(currentIndex + 1);
+    });
+
+    const rating = phones[0].querySelector(".rating");
+    if (rating) {
+      rating.addEventListener("click", replayPhoneOneAnimation);
+    }
+
+    phones[1]?.querySelectorAll(".eval-card").forEach((card) => {
+      card.addEventListener("click", replayPhoneTwoAnimation);
+    });
+  </script>
+</body>
+</html>
