@@ -87,7 +87,67 @@
       padding: 24px;
     }
 
-    /* Screen 2 — Evaluation card module (Figma 507:1512) */
+    /* Screen 2 — Evaluation Criteria (Figma 508:1576) */
+    .screen__content--criteria {
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .eval-criteria {
+      width: 345px;
+    }
+
+    .eval-criteria__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      padding-right: 2px;
+    }
+
+    .eval-criteria__title {
+      font-family: "Cabin", sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #909090;
+    }
+
+    .eval-criteria__info {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    .eval-criteria__cards {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .eval-card--static .eval-dot__fill {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .eval-card--static .eval-card__status {
+      opacity: 1;
+    }
+
+    .eval-card--static .eval-card__sparkle {
+      opacity: 1;
+    }
+
+    .eval-card--under .eval-card__status {
+      left: 129px;
+      color: #e6e6e6;
+      text-shadow: none;
+    }
+
+    .eval-card--criteria-excellent .eval-dot--5 {
+      box-shadow: 0 0 8px rgba(44, 224, 128, 0.35);
+    }
+
+    /* Screen 3 — Evaluation card modules (Figma 507:1512) */
     .eval-module {
       display: flex;
       flex-direction: column;
@@ -728,6 +788,29 @@
       animation: fade-up-btn 0.45s ease-out calc(var(--star-sparkle-end) + var(--border-reveal-dur) + 0.83s) forwards;
     }
 
+    /* Mobile #2 — four stars only, border stays at 30% opacity */
+    .screen--four-stars {
+      --star-sparkle-end: 1.7s;
+      --border-reveal-dur: 0s;
+    }
+
+    .screen--four-stars .card,
+    .screen--four-stars .card.card--animate {
+      border-color: rgba(255, 225, 68, 0.3);
+      animation: none;
+      box-shadow: none;
+    }
+
+    .screen--four-stars .star-fifth {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .screen--four-stars .rating--animate .star-fifth__core,
+    .screen--four-stars .rating--animate .star-fifth__sparkle {
+      animation: none;
+    }
+
     @keyframes fade-up-btn {
       0% {
         opacity: 0;
@@ -744,6 +827,15 @@
         animation: none !important;
         border-color: #ffe144 !important;
         box-shadow: none !important;
+      }
+      .screen--four-stars .card.card--animate {
+        border-color: rgba(255, 225, 68, 0.3) !important;
+      }
+      .screen--four-stars .star-fifth,
+      .screen--four-stars .star-fifth__core,
+      .screen--four-stars .star-fifth__sparkle {
+        opacity: 0 !important;
+        visibility: hidden !important;
       }
       .rating__star,
       .rating__separator,
@@ -880,8 +972,118 @@
       </div>
     </div>
 
-    <!-- Mobile #2 — Evaluation card (Figma 507:1512) -->
-    <div class="screen" data-phone="2" data-node-id="507:1512" hidden>
+    <!-- Mobile #2 — four stars, 30% border (no fifth star / border reveal) -->
+    <div class="screen screen--four-stars" data-phone="2" data-node-id="505:1375" hidden>
+      <div class="screen-inner">
+        <div class="screen__chevron screen__chevron--top" aria-hidden="true">
+          <img src="assets/chevron-top.png" alt="" width="288" height="852" />
+        </div>
+        <div class="screen__chevron screen__chevron--bottom" aria-hidden="true">
+          <img src="assets/chevron-bottom.png" alt="" width="288" height="852" />
+        </div>
+        <main class="screen__content">
+          <article class="card card--animate" data-node-id="505:1388">
+            <h1 class="card__title" data-node-id="505:1390">Reviving a cold lead</h1>
+            <div class="card__divider" role="presentation" data-node-id="505:1391"></div>
+            <div class="rating rating--animate" data-node-id="505:1392" aria-label="Rating animating to 4 stars">
+              <div class="rating__star rating__star--1" aria-hidden="true">
+                <img src="assets/star.svg" alt="" />
+              </div>
+              <div class="rating__star rating__star--2" aria-hidden="true">
+                <img src="assets/star.svg" alt="" />
+              </div>
+              <div class="rating__star rating__star--3" aria-hidden="true">
+                <img src="assets/star.svg" alt="" />
+              </div>
+              <div class="rating__star rating__star--4" aria-hidden="true">
+                <img src="assets/star.svg" alt="" />
+              </div>
+              <div class="star-fifth" aria-hidden="true" data-node-id="505:1484" hidden>
+                <div class="star-fifth__core">
+                  <img src="assets/star.svg" alt="" />
+                </div>
+                <img class="star-fifth__sparkle star-fifth__sparkle--1" src="assets/sparkle.svg" alt="" style="--x: 28.35px; --y: 4.02px; --rot: -3.32deg; --size: 6.5px" />
+                <img class="star-fifth__sparkle star-fifth__sparkle--2" src="assets/sparkle.svg" alt="" style="--x: 9.39px; --y: 4.36px; --rot: -84.22deg; --size: 6.5px" />
+                <img class="star-fifth__sparkle star-fifth__sparkle--3" src="assets/sparkle.svg" alt="" style="--x: 4.71px; --y: 21.85px; --rot: -163.97deg; --size: 7px" />
+                <img class="star-fifth__sparkle star-fifth__sparkle--4" src="assets/sparkle.svg" alt="" style="--x: 33.16px; --y: 21px; --rot: 67.98deg; --size: 7px" />
+                <img class="star-fifth__sparkle star-fifth__sparkle--5" src="assets/sparkle.svg" alt="" style="--x: 18.96px; --y: 31.51px; --rot: 135.49deg; --size: 7.5px" />
+              </div>
+              <span class="rating__separator" aria-hidden="true" data-node-id="505:1397"></span>
+              <div class="rating__check" data-node-id="505:1398">
+                <img src="assets/check.svg" alt="Completed" />
+              </div>
+            </div>
+            <p class="card__message" data-node-id="505:1389">
+              5/5 stars! Congrats on getting perfected! Keep up the good work!
+            </p>
+          </article>
+          <button type="button" class="btn-feedback" data-node-id="505:1419">
+            View personalized feedback
+          </button>
+        </main>
+      </div>
+    </div>
+
+    <!-- Mobile #3 — Evaluation Criteria (Figma 508:1576) -->
+    <div class="screen" data-phone="3" data-node-id="508:1576" hidden>
+      <div class="screen-inner">
+        <div class="screen__chevron screen__chevron--top" aria-hidden="true">
+          <img src="assets/chevron-top.png" alt="" width="288" height="852" />
+        </div>
+        <div class="screen__chevron screen__chevron--bottom" aria-hidden="true">
+          <img src="assets/chevron-bottom.png" alt="" width="288" height="852" />
+        </div>
+        <main class="screen__content screen__content--criteria">
+          <section class="eval-criteria" data-node-id="508:1576">
+            <header class="eval-criteria__header">
+              <h2 class="eval-criteria__title" data-node-id="508:1616">Evaluation Criteria</h2>
+              <img class="eval-criteria__info" src="assets/icon-info.svg" alt="" data-node-id="508:1617" />
+            </header>
+            <div class="eval-criteria__cards">
+              <article class="eval-card eval-card--static eval-card--under" data-node-id="508:1577">
+                <div class="eval-card__row">
+                  <div class="eval-card__label">
+                    <img class="eval-card__icon" src="assets/icon-list-check.svg" alt="" />
+                    <span class="eval-card__name">Product sales performance</span>
+                  </div>
+                </div>
+                <img class="eval-card__chevron" src="assets/icon-chevron.svg" alt="" />
+                <div class="eval-card__rating">
+                  <span class="eval-dot eval-dot--1"><span class="eval-dot__fill eval-dot__fill--red"></span></span>
+                  <span class="eval-dot eval-dot--2"></span>
+                  <span class="eval-dot eval-dot--3"></span>
+                  <span class="eval-dot eval-dot--4"></span>
+                  <span class="eval-dot eval-dot--5"></span>
+                  <p class="eval-card__status">“Underperforming”</p>
+                </div>
+              </article>
+              <article class="eval-card eval-card--static eval-card--criteria-excellent" data-node-id="508:1627">
+                <div class="eval-card__row">
+                  <div class="eval-card__label">
+                    <img class="eval-card__icon" src="assets/icon-list-check.svg" alt="" />
+                    <span class="eval-card__name">Product sales performance</span>
+                  </div>
+                </div>
+                <img class="eval-card__chevron" src="assets/icon-chevron.svg" alt="" />
+                <div class="eval-card__rating">
+                  <span class="eval-dot eval-dot--1"><span class="eval-dot__fill eval-dot__fill--green"></span></span>
+                  <span class="eval-dot eval-dot--2"><span class="eval-dot__fill eval-dot__fill--green"></span></span>
+                  <span class="eval-dot eval-dot--3"><span class="eval-dot__fill eval-dot__fill--green"></span></span>
+                  <span class="eval-dot eval-dot--4"><span class="eval-dot__fill eval-dot__fill--green"></span></span>
+                  <span class="eval-dot eval-dot--5 eval-dot--glow"><span class="eval-dot__fill eval-dot__fill--green"></span></span>
+                  <img class="eval-card__sparkle eval-card__sparkle--1" src="assets/sparkle-green-2.svg" alt="" />
+                  <img class="eval-card__sparkle eval-card__sparkle--2" src="assets/sparkle-green-1.svg" alt="" />
+                  <p class="eval-card__status">“Excellent”</p>
+                </div>
+              </article>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <!-- Mobile #4 — Animated evaluation modules (Figma 507:1512) -->
+    <div class="screen" data-phone="4" data-node-id="507:1512" hidden>
       <div class="screen-inner">
         <div class="screen__chevron screen__chevron--top" aria-hidden="true">
           <img src="assets/chevron-top.png" alt="" width="288" height="852" />
@@ -964,10 +1166,10 @@
     const nextBtn = document.getElementById("btn-next");
     let currentIndex = 0;
 
-    function replayPhoneOneAnimation() {
-      const phone = phones[0];
-      const rating = phone.querySelector(".rating");
-      const card = phone.querySelector(".card");
+    function replayPerfectScore(phoneIndex) {
+      const phone = phones[phoneIndex];
+      const rating = phone?.querySelector(".rating");
+      const card = phone?.querySelector(".card");
       if (!rating || !card) return;
 
       rating.classList.remove("rating--animate");
@@ -990,15 +1192,15 @@
       backBtn.disabled = index === 0;
       nextBtn.disabled = index === phones.length - 1;
 
-      if (index === 0) {
-        replayPhoneOneAnimation();
-      } else if (index === 1) {
-        replayPhoneTwoAnimation();
+      if (index === 0 || index === 1) {
+        replayPerfectScore(index);
+      } else if (index === 3) {
+        replayEvalModulesAnimation();
       }
     }
 
-    function replayPhoneTwoAnimation() {
-      const cards = phones[1]?.querySelectorAll(".eval-card");
+    function replayEvalModulesAnimation() {
+      const cards = phones[3]?.querySelectorAll(".eval-card");
       if (!cards?.length) return;
       cards.forEach((card) => card.classList.remove("eval-card--animate"));
       void cards[0].offsetWidth;
@@ -1013,13 +1215,15 @@
       if (currentIndex < phones.length - 1) showPhone(currentIndex + 1);
     });
 
-    const rating = phones[0].querySelector(".rating");
-    if (rating) {
-      rating.addEventListener("click", replayPhoneOneAnimation);
-    }
+    [0, 1].forEach((i) => {
+      const rating = phones[i]?.querySelector(".rating");
+      if (rating) {
+        rating.addEventListener("click", () => replayPerfectScore(i));
+      }
+    });
 
-    phones[1]?.querySelectorAll(".eval-card").forEach((card) => {
-      card.addEventListener("click", replayPhoneTwoAnimation);
+    phones[3]?.querySelectorAll(".eval-card").forEach((card) => {
+      card.addEventListener("click", replayEvalModulesAnimation);
     });
   </script>
 </body>

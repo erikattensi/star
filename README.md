@@ -3,7 +3,9 @@
 Built from [SKILLS Realtalk Design](https://www.figma.com/design/lIS4T2YIXbPusWcjAVBYTF/SKILLS-Realtalk-Design):
 
 - **Mobile #1** — [Perfect score screen](https://www.figma.com/design/lIS4T2YIXbPusWcjAVBYTF/SKILLS-Realtalk-Design?node-id=505-1375) (`505:1375`)
-- **Mobile #2** — [Evaluation card — Excellent](https://www.figma.com/design/lIS4T2YIXbPusWcjAVBYTF/SKILLS-Realtalk-Design?node-id=507-1512) (`507:1512`)
+- **Mobile #2** — Perfect score variant: 4 stars only (fifth empty), border fixed at 30% opacity (no border reveal)
+- **Mobile #3** — [Evaluation Criteria](https://www.figma.com/design/lIS4T2YIXbPusWcjAVBYTF/SKILLS-Realtalk-Design?node-id=508-1576) (`508:1576`) — Underperforming + Excellent cards
+- **Mobile #4** — [Animated evaluation modules](https://www.figma.com/design/lIS4T2YIXbPusWcjAVBYTF/SKILLS-Realtalk-Design?node-id=507-1512) (`507:1512`) — three stacked cards with staggered animation
 
 The star rating row (`505:1392`) is exported as a single PNG from Figma so the perfected fifth star matches the design exactly.
 
