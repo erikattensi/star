@@ -745,7 +745,7 @@
       }
     }
 
-    /* Star row timing — orbit ends, then pulse + border start together */
+    /* Mobile #1 — sparkles end, then border, then badge */
     .screen--animate {
       --sparkle-after-fifth-gap: 0.12s;
       --sparkle-delay: 1.72s;
@@ -755,14 +755,15 @@
       --border-reveal-dur: 0.55s;
       --check-appear-dur: 0.4s;
       --check-appear-delay: calc(var(--star-sparkle-end) + var(--border-reveal-dur) + var(--post-border-badge-gap, 0.1s));
-      --badge-shine-dur: 2s;
+      --badge-shine-dur: 2.4s;
+      --badge-shine-trail-dur: 2.7s;
       --post-border-sep-gap: 0.08s;
       --post-border-badge-gap: 0.1s;
       --post-border-msg-gap: 0.35s;
       --post-border-btn-gap: 0.65s;
     }
 
-    .card.card--animate {
+    .screen--animate:not(.screen--four-stars):not(.screen--shrink-fifth) .card.card--animate {
       animation: card-border-reveal var(--border-reveal-dur) ease-out var(--star-sparkle-end) forwards;
     }
 
@@ -894,39 +895,97 @@
       z-index: 0;
     }
 
+    .rating__check::before,
     .rating__check::after {
       content: "";
       position: absolute;
-      inset: -20%;
+      inset: -25%;
       z-index: 1;
       border-radius: 50%;
-      background: linear-gradient(
-        105deg,
-        transparent 18%,
-        rgba(255, 255, 255, 0.1) 32%,
-        rgba(255, 255, 220, 0.65) 50%,
-        rgba(255, 255, 255, 0.1) 68%,
-        transparent 82%
-      );
       opacity: 0;
-      transform: translateX(-130%) skewX(-14deg);
       pointer-events: none;
     }
 
-    @keyframes badge-shine {
+    /* Wide gold wash — trails the specular streak */
+    .rating__check::before {
+      background: linear-gradient(
+        108deg,
+        transparent 0%,
+        rgba(255, 214, 80, 0.08) 18%,
+        rgba(255, 236, 160, 0.28) 38%,
+        rgba(255, 248, 210, 0.42) 50%,
+        rgba(255, 236, 160, 0.28) 62%,
+        rgba(255, 214, 80, 0.08) 82%,
+        transparent 100%
+      );
+      filter: blur(1.5px);
+      transform: translateX(-160%) skewX(-10deg) scale(1.15);
+    }
+
+    /* Tight specular core + prismatic edge bands */
+    .rating__check::after {
+      inset: -18%;
+      background: linear-gradient(
+        102deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.12) 22%,
+        rgba(255, 245, 200, 0.55) 36%,
+        rgba(255, 255, 255, 1) 44%,
+        rgba(255, 228, 120, 0.9) 48%,
+        rgba(255, 255, 255, 1) 50%,
+        rgba(255, 228, 120, 0.9) 52%,
+        rgba(255, 245, 200, 0.55) 58%,
+        rgba(255, 255, 255, 0.12) 72%,
+        transparent 88%
+      );
+      box-shadow: 0 0 12px rgba(255, 240, 160, 0.35);
+      transform: translateX(-170%) skewX(-16deg) scaleY(0.9);
+    }
+
+    @keyframes badge-shine-trail {
       0% {
         opacity: 0;
-        transform: translateX(-150%) skewX(-14deg);
+        transform: translateX(-160%) skewX(-10deg) scale(1.15);
       }
-      8% {
+      10% {
+        opacity: 0.85;
+      }
+      45% {
+        opacity: 1;
+        transform: translateX(-5%) skewX(-6deg) scale(1.2);
+      }
+      90% {
+        opacity: 0.75;
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(165%) skewX(-8deg) scale(1.12);
+      }
+    }
+
+    @keyframes badge-shine-core {
+      0% {
+        opacity: 0;
+        transform: translateX(-170%) skewX(-16deg) scaleY(0.9);
+      }
+      6% {
         opacity: 1;
       }
-      92% {
+      38% {
+        transform: translateX(-15%) skewX(-11deg) scaleY(1.08);
+      }
+      50% {
+        transform: translateX(0%) skewX(-14deg) scaleY(1.12);
+      }
+      62% {
+        transform: translateX(18%) skewX(-12deg) scaleY(1.06);
+      }
+      94% {
         opacity: 1;
       }
       100% {
         opacity: 0;
-        transform: translateX(150%) skewX(-14deg);
+        transform: translateX(175%) skewX(-15deg) scaleY(0.92);
       }
     }
 
@@ -1232,24 +1291,33 @@
         sparkle-eject-orbit var(--sparkle-orbit-dur) linear var(--sparkle-delay) forwards,
         sparkle-pulse var(--sparkle-pulse-dur) ease-in-out var(--star-sparkle-end) forwards;
     }
-    .rating--animate .rating__separator {
-      animation: separator-grow 0.3s ease-out calc(var(--star-sparkle-end) + var(--border-reveal-dur) + var(--post-border-sep-gap, 0.08s)) forwards;
+    .screen--animate:not(.screen--four-stars):not(.screen--shrink-fifth) .rating--animate .rating__separator {
+      animation: separator-grow 0.3s ease-out
+        calc(var(--star-sparkle-end) + var(--border-reveal-dur) + var(--post-border-sep-gap, 0.08s)) forwards;
     }
-    .screen--animate .rating--animate .rating__check {
+
+    .screen--animate:not(.screen--four-stars):not(.screen--shrink-fifth) .rating--animate .rating__check {
       animation: fade-scale-in var(--check-appear-dur) cubic-bezier(0.34, 1.3, 0.64, 1) var(--check-appear-delay) forwards;
     }
 
-    .screen--animate .rating--animate .rating__check::after {
-      animation: badge-shine var(--badge-shine-dur) linear
+    .screen--animate .rating--animate .rating__check::before {
+      animation: badge-shine-trail var(--badge-shine-trail-dur, 2.7s) ease-in-out
         calc(var(--check-appear-delay) + var(--check-appear-dur)) forwards;
     }
 
-    .card--animate .card__message {
-      animation: fade-up 0.5s ease-out calc(var(--star-sparkle-end) + var(--border-reveal-dur) + var(--post-border-msg-gap, 0.35s)) forwards;
+    .screen--animate .rating--animate .rating__check::after {
+      animation: badge-shine-core var(--badge-shine-dur) cubic-bezier(0.4, 0, 0.2, 1)
+        calc(var(--check-appear-delay) + var(--check-appear-dur) + 0.06s) forwards;
     }
 
-    .screen--animate .btn-feedback {
-      animation: fade-up-btn 0.45s ease-out calc(var(--star-sparkle-end) + var(--border-reveal-dur) + var(--post-border-btn-gap, 0.65s)) forwards;
+    .screen--animate:not(.screen--four-stars):not(.screen--shrink-fifth) .card.card--animate .card__message {
+      animation: fade-up 0.5s ease-out
+        calc(var(--star-sparkle-end) + var(--border-reveal-dur) + var(--post-border-msg-gap, 0.35s)) forwards;
+    }
+
+    .screen--animate:not(.screen--four-stars):not(.screen--shrink-fifth) .btn-feedback {
+      animation: fade-up-btn 0.45s ease-out
+        calc(var(--star-sparkle-end) + var(--border-reveal-dur) + var(--post-border-btn-gap, 0.65s)) forwards;
     }
 
     /* Mobile #3 — four stars; border + badge reveal in lockstep */
@@ -1259,7 +1327,8 @@
       --check-appear-dur: var(--border-reveal-dur);
       --check-appear-delay: calc(var(--star-sparkle-end) + var(--post-border-badge-gap, 0.28s));
       --badge-border-sync-end: calc(var(--check-appear-delay) + var(--border-reveal-dur));
-      --badge-shine-dur: 2s;
+      --badge-shine-dur: 2.4s;
+      --badge-shine-trail-dur: 2.7s;
       --post-border-sep-gap: 0.08s;
       --post-border-badge-gap: 0.28s;
       --post-border-msg-gap: 0.53s;
@@ -1316,9 +1385,33 @@
       --fifth-hero-active-dur: calc(var(--hero-appear-dur) + var(--hero-hold-dur) + var(--fifth-shrink-dur));
       --sparkle-delay: calc(var(--fifth-shrink-start) + var(--fifth-hero-active-dur) + var(--sparkle-after-fifth-gap, 0.12s));
       --star-sparkle-end: calc(var(--sparkle-delay) + var(--sparkle-orbit-dur));
-      --check-appear-dur: 0.4s;
-      --check-appear-delay: calc(var(--star-sparkle-end) + var(--border-reveal-dur) + var(--post-border-badge-gap, 0.1s));
-      --badge-shine-dur: 2s;
+      --check-appear-dur: var(--border-reveal-dur);
+      --check-appear-delay: calc(var(--star-sparkle-end) + var(--post-border-badge-gap, 0.1s));
+      --badge-border-sync-end: calc(var(--check-appear-delay) + var(--border-reveal-dur));
+    }
+
+    /* Mobile #2 — border + badge in lockstep (Mobile #1 keeps border-then-badge) */
+    .screen--shrink-fifth.screen--animate .card.card--animate {
+      animation: card-border-reveal var(--border-reveal-dur) ease-out var(--check-appear-delay) forwards;
+    }
+
+    .screen--shrink-fifth.screen--animate .rating--animate .rating__check {
+      animation: badge-pop-sync var(--check-appear-dur) ease-out var(--check-appear-delay) forwards;
+    }
+
+    .screen--shrink-fifth.screen--animate .rating--animate .rating__separator {
+      animation: separator-grow 0.3s ease-out
+        calc(var(--badge-border-sync-end) + var(--post-border-sep-gap, 0.08s)) forwards;
+    }
+
+    .screen--shrink-fifth.screen--animate .card.card--animate .card__message {
+      animation: fade-up 0.5s ease-out
+        calc(var(--badge-border-sync-end) + var(--post-border-msg-gap, 0.35s)) forwards;
+    }
+
+    .screen--shrink-fifth.screen--animate .btn-feedback {
+      animation: fade-up-btn 0.45s ease-out
+        calc(var(--badge-border-sync-end) + var(--post-border-btn-gap, 0.65s)) forwards;
     }
 
     .screen--shrink-fifth .card,
@@ -1466,12 +1559,12 @@
 
     .screen--shrink-fifth.screen--animate .card--animate .card-confetti--top .confetti-piece {
       animation: confetti-burst-up var(--border-reveal-dur) cubic-bezier(0.15, 0.9, 0.35, 1)
-        calc(var(--star-sparkle-end) + var(--confetti-stagger, 0s)) forwards;
+        calc(var(--check-appear-delay) + var(--confetti-stagger, 0s)) forwards;
     }
 
     .screen--shrink-fifth.screen--animate .card--animate .card-confetti--bottom .confetti-piece {
       animation: confetti-burst-down var(--border-reveal-dur) cubic-bezier(0.15, 0.9, 0.35, 1)
-        calc(var(--star-sparkle-end) + var(--confetti-stagger, 0s)) forwards;
+        calc(var(--check-appear-delay) + var(--confetti-stagger, 0s)) forwards;
     }
 
     @keyframes fade-up-btn {
@@ -1545,9 +1638,11 @@
       .rating__check {
         transform: none !important;
       }
+      .rating__check::before,
       .rating__check::after {
         animation: none !important;
         opacity: 0 !important;
+        box-shadow: none !important;
       }
       .card__message {
         transform: translateX(-50%) !important;
