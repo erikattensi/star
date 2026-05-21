@@ -747,9 +747,10 @@
 
     /* Star row timing — orbit ends, then pulse + border start together */
     .screen--animate {
-      --sparkle-delay: 2.05s;
-      --sparkle-orbit-dur: 1.25s;
-      --sparkle-pulse-dur: 0.42s;
+      --sparkle-after-fifth-gap: 0.12s;
+      --sparkle-delay: 1.72s;
+      --sparkle-orbit-dur: 1.05s;
+      --sparkle-pulse-dur: 0.35s;
       --star-sparkle-end: calc(var(--sparkle-delay) + var(--sparkle-orbit-dur));
       --border-reveal-dur: 0.55s;
       --post-border-sep-gap: 0.08s;
@@ -1194,7 +1195,7 @@
       --hero-hold-dur: 0.12s;
       --fifth-shrink-dur: 0.82s;
       --fifth-hero-active-dur: calc(var(--hero-appear-dur) + var(--hero-hold-dur) + var(--fifth-shrink-dur));
-      --sparkle-delay: calc(var(--fifth-shrink-start) + var(--fifth-hero-active-dur) + 0.45s);
+      --sparkle-delay: calc(var(--fifth-shrink-start) + var(--fifth-hero-active-dur) + var(--sparkle-after-fifth-gap, 0.12s));
       --star-sparkle-end: calc(var(--sparkle-delay) + var(--sparkle-orbit-dur));
     }
 
