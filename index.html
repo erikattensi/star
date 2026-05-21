@@ -1092,6 +1092,53 @@
       }
     }
 
+    /* Mobile #3 — badge + border share duration and keyframe beats */
+    @keyframes card-border-reveal-four-stars {
+      0% {
+        border-color: rgba(255, 225, 68, 0.3);
+        box-shadow: 0 0 0 0 rgba(255, 225, 68, 0);
+      }
+      32% {
+        border-color: #ffe144;
+        box-shadow: 0 0 0 0 rgba(255, 225, 68, 0);
+      }
+      52% {
+        border-color: #ffe144;
+        box-shadow: 0 0 0 4px #ffe144;
+      }
+      72% {
+        border-color: #ffe144;
+        box-shadow: 0 0 0 1px #ffe144;
+      }
+      100% {
+        border-color: #ffe144;
+        box-shadow: none;
+      }
+    }
+
+    @keyframes badge-pop-sync {
+      0% {
+        opacity: 0;
+        transform: scale(0);
+      }
+      32% {
+        opacity: 0.85;
+        transform: scale(0.82);
+      }
+      52% {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+      72% {
+        opacity: 1;
+        transform: scale(1.03);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
     @keyframes separator-grow {
       0% {
         opacity: 0;
@@ -1205,12 +1252,13 @@
       animation: fade-up-btn 0.45s ease-out calc(var(--star-sparkle-end) + var(--border-reveal-dur) + var(--post-border-btn-gap, 0.65s)) forwards;
     }
 
-    /* Mobile #3 — four stars only, border stays at 30% opacity */
+    /* Mobile #3 — four stars; border + badge reveal in lockstep */
     .screen--four-stars {
       --star-sparkle-end: 1.7s;
-      --border-reveal-dur: 0s;
-      --check-appear-dur: 0.4s;
-      --check-appear-delay: calc(var(--star-sparkle-end) + var(--border-reveal-dur) + var(--post-border-badge-gap, 0.28s));
+      --border-reveal-dur: 0.55s;
+      --check-appear-dur: var(--border-reveal-dur);
+      --check-appear-delay: calc(var(--star-sparkle-end) + var(--post-border-badge-gap, 0.28s));
+      --badge-border-sync-end: calc(var(--check-appear-delay) + var(--border-reveal-dur));
       --badge-shine-dur: 2s;
       --post-border-sep-gap: 0.08s;
       --post-border-badge-gap: 0.28s;
@@ -1218,11 +1266,31 @@
       --post-border-btn-gap: 0.83s;
     }
 
-    .screen--four-stars .card,
-    .screen--four-stars .card.card--animate {
+    .screen--four-stars .card {
       border-color: rgba(255, 225, 68, 0.3);
-      animation: none;
-      box-shadow: none;
+    }
+
+    .screen--four-stars.screen--animate .card.card--animate {
+      animation: card-border-reveal-four-stars var(--border-reveal-dur) ease-out var(--check-appear-delay) forwards;
+    }
+
+    .screen--four-stars.screen--animate .rating--animate .rating__check {
+      animation: badge-pop-sync var(--check-appear-dur) ease-out var(--check-appear-delay) forwards;
+    }
+
+    .screen--four-stars.screen--animate .rating--animate .rating__separator {
+      animation: separator-grow 0.3s ease-out
+        calc(var(--badge-border-sync-end) + var(--post-border-sep-gap, 0.08s)) forwards;
+    }
+
+    .screen--four-stars.screen--animate .card.card--animate .card__message {
+      animation: fade-up 0.5s ease-out
+        calc(var(--badge-border-sync-end) + var(--post-border-msg-gap, 0.53s)) forwards;
+    }
+
+    .screen--four-stars.screen--animate .btn-feedback {
+      animation: fade-up-btn 0.45s ease-out
+        calc(var(--badge-border-sync-end) + var(--post-border-btn-gap, 0.83s)) forwards;
     }
 
     .screen--four-stars .star-fifth {
@@ -1424,7 +1492,7 @@
         box-shadow: none !important;
       }
       .screen--four-stars .card.card--animate {
-        border-color: rgba(255, 225, 68, 0.3) !important;
+        border-color: #ffe144 !important;
       }
       .screen--four-stars .star-fifth {
         display: none !important;
