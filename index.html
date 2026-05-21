@@ -87,66 +87,6 @@
       padding: 24px;
     }
 
-    /* Screen 2 — Evaluation Criteria (Figma 508:1576) */
-    .screen__content--criteria {
-      justify-content: center;
-      padding: 24px;
-    }
-
-    .eval-criteria {
-      width: 345px;
-    }
-
-    .eval-criteria__header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 14px;
-      padding-right: 2px;
-    }
-
-    .eval-criteria__title {
-      font-family: "Cabin", sans-serif;
-      font-size: 16px;
-      font-weight: 500;
-      color: #909090;
-    }
-
-    .eval-criteria__info {
-      width: 16px;
-      height: 16px;
-      flex-shrink: 0;
-    }
-
-    .eval-criteria__cards {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .eval-card--static .eval-dot__fill {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .eval-card--static .eval-card__status {
-      opacity: 1;
-    }
-
-    .eval-card--static .eval-card__sparkle {
-      opacity: 1;
-    }
-
-    .eval-card--under .eval-card__status {
-      left: 129px;
-      color: #e6e6e6;
-      text-shadow: none;
-    }
-
-    .eval-card--criteria-excellent .eval-dot--5 {
-      box-shadow: 0 0 8px rgba(44, 224, 128, 0.35);
-    }
-
     /* Screen 3 — Evaluation card modules (Figma 507:1512) */
     .eval-module {
       display: flex;
@@ -1032,66 +972,8 @@
       </div>
     </div>
 
-    <!-- Mobile #3 — Evaluation Criteria (Figma 508:1576) -->
-    <div class="screen" data-phone="3" data-node-id="508:1576" hidden>
-      <div class="screen-inner">
-        <div class="screen__chevron screen__chevron--top" aria-hidden="true">
-          <img src="assets/chevron-top.png" alt="" width="288" height="852" />
-        </div>
-        <div class="screen__chevron screen__chevron--bottom" aria-hidden="true">
-          <img src="assets/chevron-bottom.png" alt="" width="288" height="852" />
-        </div>
-        <main class="screen__content screen__content--criteria">
-          <section class="eval-criteria" data-node-id="508:1576">
-            <header class="eval-criteria__header">
-              <h2 class="eval-criteria__title" data-node-id="508:1616">Evaluation Criteria</h2>
-              <img class="eval-criteria__info" src="assets/icon-info.svg" alt="" data-node-id="508:1617" />
-            </header>
-            <div class="eval-criteria__cards">
-              <article class="eval-card eval-card--static eval-card--under" data-node-id="508:1577">
-                <div class="eval-card__row">
-                  <div class="eval-card__label">
-                    <img class="eval-card__icon" src="assets/icon-list-check.svg" alt="" />
-                    <span class="eval-card__name">Product sales performance</span>
-                  </div>
-                </div>
-                <img class="eval-card__chevron" src="assets/icon-chevron.svg" alt="" />
-                <div class="eval-card__rating">
-                  <span class="eval-dot eval-dot--1"><span class="eval-dot__fill eval-dot__fill--red"></span></span>
-                  <span class="eval-dot eval-dot--2"></span>
-                  <span class="eval-dot eval-dot--3"></span>
-                  <span class="eval-dot eval-dot--4"></span>
-                  <span class="eval-dot eval-dot--5"></span>
-                  <p class="eval-card__status">“Underperforming”</p>
-                </div>
-              </article>
-              <article class="eval-card eval-card--static eval-card--criteria-excellent" data-node-id="508:1627">
-                <div class="eval-card__row">
-                  <div class="eval-card__label">
-                    <img class="eval-card__icon" src="assets/icon-list-check.svg" alt="" />
-                    <span class="eval-card__name">Product sales performance</span>
-                  </div>
-                </div>
-                <img class="eval-card__chevron" src="assets/icon-chevron.svg" alt="" />
-                <div class="eval-card__rating">
-                  <span class="eval-dot eval-dot--1"><span class="eval-dot__fill eval-dot__fill--green"></span></span>
-                  <span class="eval-dot eval-dot--2"><span class="eval-dot__fill eval-dot__fill--green"></span></span>
-                  <span class="eval-dot eval-dot--3"><span class="eval-dot__fill eval-dot__fill--green"></span></span>
-                  <span class="eval-dot eval-dot--4"><span class="eval-dot__fill eval-dot__fill--green"></span></span>
-                  <span class="eval-dot eval-dot--5 eval-dot--glow"><span class="eval-dot__fill eval-dot__fill--green"></span></span>
-                  <img class="eval-card__sparkle eval-card__sparkle--1" src="assets/sparkle-green-2.svg" alt="" />
-                  <img class="eval-card__sparkle eval-card__sparkle--2" src="assets/sparkle-green-1.svg" alt="" />
-                  <p class="eval-card__status">“Excellent”</p>
-                </div>
-              </article>
-            </div>
-          </section>
-        </main>
-      </div>
-    </div>
-
-    <!-- Mobile #4 — Animated evaluation modules (Figma 507:1512) -->
-    <div class="screen" data-phone="4" data-node-id="507:1512" hidden>
+    <!-- Mobile #3 — Animated evaluation modules (Figma 507:1512) -->
+    <div class="screen" data-phone="3" data-node-id="507:1512" hidden>
       <div class="screen-inner">
         <div class="screen__chevron screen__chevron--top" aria-hidden="true">
           <img src="assets/chevron-top.png" alt="" width="288" height="852" />
@@ -1202,13 +1084,13 @@
 
       if (index === 0 || index === 1) {
         replayPerfectScore(index);
-      } else if (index === 3) {
+      } else if (index === 2) {
         replayEvalModulesAnimation();
       }
     }
 
     function replayEvalModulesAnimation() {
-      const cards = phones[3]?.querySelectorAll(".eval-card");
+      const cards = phones[2]?.querySelectorAll(".eval-card");
       if (!cards?.length) return;
       cards.forEach((card) => card.classList.remove("eval-card--animate"));
       void cards[0].offsetWidth;
@@ -1230,7 +1112,7 @@
       }
     });
 
-    phones[3]?.querySelectorAll(".eval-card").forEach((card) => {
+    phones[2]?.querySelectorAll(".eval-card").forEach((card) => {
       card.addEventListener("click", replayEvalModulesAnimation);
     });
   </script>
