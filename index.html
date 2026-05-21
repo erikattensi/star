@@ -753,6 +753,9 @@
       --sparkle-pulse-dur: 0.35s;
       --star-sparkle-end: calc(var(--sparkle-delay) + var(--sparkle-orbit-dur));
       --border-reveal-dur: 0.55s;
+      --check-appear-dur: 0.4s;
+      --check-appear-delay: calc(var(--star-sparkle-end) + var(--border-reveal-dur) + var(--post-border-badge-gap, 0.1s));
+      --badge-shine-dur: 2s;
       --post-border-sep-gap: 0.08s;
       --post-border-badge-gap: 0.1s;
       --post-border-msg-gap: 0.35s;
@@ -879,12 +882,52 @@
       opacity: 0;
       transform: scale(0);
       transform-origin: center center;
+      overflow: hidden;
+      border-radius: 50%;
     }
 
     .rating__check img {
       display: block;
       width: 100%;
       height: 100%;
+      position: relative;
+      z-index: 0;
+    }
+
+    .rating__check::after {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      z-index: 1;
+      border-radius: 50%;
+      background: linear-gradient(
+        105deg,
+        transparent 18%,
+        rgba(255, 255, 255, 0.1) 32%,
+        rgba(255, 255, 220, 0.65) 50%,
+        rgba(255, 255, 255, 0.1) 68%,
+        transparent 82%
+      );
+      opacity: 0;
+      transform: translateX(-130%) skewX(-14deg);
+      pointer-events: none;
+    }
+
+    @keyframes badge-shine {
+      0% {
+        opacity: 0;
+        transform: translateX(-150%) skewX(-14deg);
+      }
+      8% {
+        opacity: 1;
+      }
+      92% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(150%) skewX(-14deg);
+      }
     }
 
     .card__message {
@@ -1145,8 +1188,13 @@
     .rating--animate .rating__separator {
       animation: separator-grow 0.3s ease-out calc(var(--star-sparkle-end) + var(--border-reveal-dur) + var(--post-border-sep-gap, 0.08s)) forwards;
     }
-    .rating--animate .rating__check {
-      animation: fade-scale-in 0.4s cubic-bezier(0.34, 1.3, 0.64, 1) calc(var(--star-sparkle-end) + var(--border-reveal-dur) + var(--post-border-badge-gap, 0.1s)) forwards;
+    .screen--animate .rating--animate .rating__check {
+      animation: fade-scale-in var(--check-appear-dur) cubic-bezier(0.34, 1.3, 0.64, 1) var(--check-appear-delay) forwards;
+    }
+
+    .screen--animate .rating--animate .rating__check::after {
+      animation: badge-shine var(--badge-shine-dur) linear
+        calc(var(--check-appear-delay) + var(--check-appear-dur)) forwards;
     }
 
     .card--animate .card__message {
@@ -1157,10 +1205,13 @@
       animation: fade-up-btn 0.45s ease-out calc(var(--star-sparkle-end) + var(--border-reveal-dur) + var(--post-border-btn-gap, 0.65s)) forwards;
     }
 
-    /* Mobile #2 — four stars only, border stays at 30% opacity */
+    /* Mobile #3 — four stars only, border stays at 30% opacity */
     .screen--four-stars {
       --star-sparkle-end: 1.7s;
       --border-reveal-dur: 0s;
+      --check-appear-dur: 0.4s;
+      --check-appear-delay: calc(var(--star-sparkle-end) + var(--border-reveal-dur) + var(--post-border-badge-gap, 0.28s));
+      --badge-shine-dur: 2s;
       --post-border-sep-gap: 0.08s;
       --post-border-badge-gap: 0.28s;
       --post-border-msg-gap: 0.53s;
@@ -1197,6 +1248,9 @@
       --fifth-hero-active-dur: calc(var(--hero-appear-dur) + var(--hero-hold-dur) + var(--fifth-shrink-dur));
       --sparkle-delay: calc(var(--fifth-shrink-start) + var(--fifth-hero-active-dur) + var(--sparkle-after-fifth-gap, 0.12s));
       --star-sparkle-end: calc(var(--sparkle-delay) + var(--sparkle-orbit-dur));
+      --check-appear-dur: 0.4s;
+      --check-appear-delay: calc(var(--star-sparkle-end) + var(--border-reveal-dur) + var(--post-border-badge-gap, 0.1s));
+      --badge-shine-dur: 2s;
     }
 
     .screen--shrink-fifth .card,
@@ -1423,6 +1477,10 @@
       .rating__check {
         transform: none !important;
       }
+      .rating__check::after {
+        animation: none !important;
+        opacity: 0 !important;
+      }
       .card__message {
         transform: translateX(-50%) !important;
       }
@@ -1635,10 +1693,10 @@
           <img src="assets/chevron-bottom.png" alt="" width="288" height="852" />
         </div>
         <main class="screen__content">
-          <article class="card card--animate" data-node-id="505:1388">
+          <article class="card" data-node-id="505:1388">
             <h1 class="card__title" data-node-id="505:1390">Reviving a cold lead</h1>
             <div class="card__divider" role="presentation" data-node-id="505:1391"></div>
-            <div class="rating rating--animate" data-node-id="505:1392" aria-label="Rating animating to 4 stars">
+            <div class="rating" data-node-id="505:1392" aria-label="Rating animating to 4 stars">
               <div class="rating__star rating__star--1" aria-hidden="true">
                 <img src="assets/star.svg" alt="" />
               </div>
