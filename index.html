@@ -35,11 +35,37 @@
       max-width: 393px;
     }
 
+    .preview__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 12px;
+    }
+
     .preview__title {
       font-size: 18px;
       font-weight: 700;
       color: #e6e6e6;
       letter-spacing: 0.02em;
+    }
+
+    .preview__refresh {
+      flex-shrink: 0;
+      padding: 10px 18px;
+      font-family: "Cabin", sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #e6e6e6;
+      background: #1a1a1a;
+      border: 1px solid #787878;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .preview__refresh:hover {
+      background: #222;
     }
 
     .preview__nav {
@@ -85,6 +111,283 @@
     .screen__content--eval {
       justify-content: center;
       padding: 24px;
+    }
+
+    /* Screen 5 — Hold to talk (Figma 521:839) */
+    .screen-inner--talk {
+      background: #101010;
+    }
+
+    .talk {
+      position: relative;
+      width: 100%;
+      min-height: 852px;
+      overflow: hidden;
+      background: #101010;
+    }
+
+    .talk__bg {
+      position: absolute;
+      left: -73px;
+      top: 0;
+      width: 539px;
+      height: 953px;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    .talk__gradient {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+    }
+
+    .talk__gradient--bottom {
+      top: 628px;
+      height: 224px;
+      background: linear-gradient(to top, #020202 73%, #636363 106.1%);
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .talk__hint {
+      position: absolute;
+      right: 0;
+      top: 69px;
+      width: 42px;
+      height: 34px;
+      background: rgba(90, 90, 90, 0.6);
+      backdrop-filter: blur(7.5px);
+      -webkit-backdrop-filter: blur(7.5px);
+      border: 1px solid #4cdeff;
+      border-right: none;
+      border-radius: 10px 0 0 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .talk__hint-dot {
+      width: 20px;
+      height: 20px;
+      border: 1px solid #c1c0c0;
+      border-radius: 50%;
+    }
+
+    .talk__back,
+    .talk__fab {
+      position: absolute;
+      width: 56px;
+      height: 56px;
+      border: none;
+      border-radius: 50%;
+      backdrop-filter: blur(2.5px);
+      -webkit-backdrop-filter: blur(2.5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .talk__back {
+      left: 20px;
+      top: 58px;
+      background: rgba(90, 90, 90, 0.6);
+    }
+
+    .talk__back img {
+      width: 24px;
+      height: 24px;
+    }
+
+    .talk__bubble {
+      position: absolute;
+      left: 20px;
+      width: 353px;
+      padding: 12px 15px;
+      background: rgba(44, 47, 49, 0.4);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      font-family: "Lato", sans-serif;
+      font-size: 16px;
+      line-height: normal;
+      color: #dbdbdb;
+      margin: 0;
+    }
+
+    .talk__bubble--alex {
+      top: 465px;
+    }
+
+    .talk__bubble--you {
+      top: 537px;
+    }
+
+    .talk__bubble strong {
+      font-weight: 900;
+    }
+
+    .talk__bubble-emphasis {
+      color: #31df3e;
+    }
+
+    .talk__dots {
+      position: absolute;
+      left: 50%;
+      top: 637px;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .talk__dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: rgba(223, 223, 223, 0.15);
+      backdrop-filter: blur(2.5px);
+      -webkit-backdrop-filter: blur(2.5px);
+      border: 1px solid #e1e1e1;
+      box-shadow: 0 0 25px rgba(225, 225, 225, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .talk__dot-inner {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(223, 223, 223, 0.8);
+    }
+
+    .talk__dot--inactive .talk__dot-inner {
+      opacity: 0.35;
+    }
+
+    .talk__mic-wrap {
+      position: absolute;
+      left: 50%;
+      top: 666px;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .talk__mic {
+      width: 125px;
+      height: 125px;
+      border: 1px solid #e1e1e1;
+      border-radius: 30px;
+      background: rgba(223, 223, 223, 0.15);
+      backdrop-filter: blur(2.5px);
+      -webkit-backdrop-filter: blur(2.5px);
+      box-shadow: 0 0 25px rgba(225, 225, 225, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .talk__mic img {
+      width: 70px;
+      height: 70px;
+    }
+
+    .talk__mic-label {
+      font-family: "Lato", sans-serif;
+      font-size: 16px;
+      color: #dbdbdb;
+      white-space: nowrap;
+    }
+
+    .talk__fab--keyboard {
+      left: 20px;
+      top: 771px;
+      background: rgba(223, 223, 223, 0.15);
+    }
+
+    .talk__fab--info {
+      left: 317px;
+      top: 771px;
+      background: rgba(223, 223, 223, 0.15);
+    }
+
+    .talk__fab--keyboard img {
+      width: 36px;
+      height: 36px;
+    }
+
+    .talk__fab--info img {
+      width: 28px;
+      height: 28px;
+    }
+
+    /* Screen 4 — Evaluation Criteria (Figma 508:1576) */
+    .screen__content--criteria {
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .eval-criteria {
+      width: 345px;
+    }
+
+    .eval-criteria__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      padding-right: 2px;
+    }
+
+    .eval-criteria__title {
+      font-family: "Cabin", sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #909090;
+    }
+
+    .eval-criteria__info {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    .eval-criteria__cards {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .eval-card--static .eval-dot__fill {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .eval-card--static .eval-card__status {
+      opacity: 1;
+    }
+
+    .eval-card--static .eval-card__sparkle {
+      opacity: 1;
+    }
+
+    .eval-card--under .eval-card__status {
+      left: 129px;
+      color: #e6e6e6;
+      text-shadow: none;
+    }
+
+    .eval-card--criteria-excellent .eval-dot--5 {
+      box-shadow: 0 0 8px rgba(44, 224, 128, 0.35);
     }
 
     /* Screen 3 — Evaluation card modules (Figma 507:1512) */
@@ -442,9 +745,12 @@
       }
     }
 
-    /* Star row timing — last sparkle ends at 2.44s + 0.38s */
+    /* Star row timing — orbit ends, then pulse + border start together */
     .screen--animate {
-      --star-sparkle-end: 2.82s;
+      --sparkle-delay: 2.05s;
+      --sparkle-orbit-dur: 1.25s;
+      --sparkle-pulse-dur: 0.42s;
+      --star-sparkle-end: calc(var(--sparkle-delay) + var(--sparkle-orbit-dur));
       --border-reveal-dur: 0.55s;
       --post-border-sep-gap: 0.08s;
       --post-border-badge-gap: 0.1s;
@@ -509,6 +815,7 @@
     .rating__star--2 { left: 34px; }
     .rating__star--3 { left: 68px; }
     .rating__star--4 { left: 102px; }
+    .rating__star--5 { left: 136px; }
 
     /* Figma fifth star frame 505:1455 */
     .star-fifth {
@@ -650,6 +957,82 @@
       }
     }
 
+    /* Mobile #1 — eject from star, then one lap around star center */
+    @keyframes sparkle-eject-orbit {
+      0% {
+        opacity: 0;
+        transform: translate(calc(19px - var(--x)), calc(15px - var(--y))) translate(-50%, -50%)
+          scale(0) rotate(var(--rot));
+      }
+      28% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.12) rotate(var(--rot));
+      }
+      32% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1) rotate(var(--rot));
+      }
+      36% {
+        opacity: 1;
+        transform: translate(calc(19px - var(--x)), calc(15px - var(--y))) translate(-50%, -50%)
+          rotate(var(--orbit-angle)) translateX(var(--orbit-r)) rotate(var(--orbit-ccw))
+          scale(1) rotate(var(--rot));
+      }
+      47% {
+        opacity: 1;
+        transform: translate(calc(19px - var(--x)), calc(15px - var(--y))) translate(-50%, -50%)
+          rotate(calc(var(--orbit-angle) + 45deg)) translateX(var(--orbit-r))
+          rotate(calc(var(--orbit-ccw) - 45deg)) scale(1) rotate(var(--rot));
+      }
+      57% {
+        opacity: 1;
+        transform: translate(calc(19px - var(--x)), calc(15px - var(--y))) translate(-50%, -50%)
+          rotate(calc(var(--orbit-angle) + 180deg)) translateX(var(--orbit-r))
+          rotate(calc(var(--orbit-ccw) - 180deg)) scale(1) rotate(var(--rot));
+      }
+      67% {
+        opacity: 1;
+        transform: translate(calc(19px - var(--x)), calc(15px - var(--y))) translate(-50%, -50%)
+          rotate(calc(var(--orbit-angle) + 315deg)) translateX(var(--orbit-r))
+          rotate(calc(var(--orbit-ccw) - 315deg)) scale(1) rotate(var(--rot));
+      }
+      74% {
+        opacity: 1;
+        transform: translate(calc(19px - var(--x)), calc(15px - var(--y))) translate(-50%, -50%)
+          rotate(calc(var(--orbit-angle) + 345deg)) translateX(var(--orbit-r))
+          rotate(calc(var(--orbit-ccw) - 345deg)) scale(1) rotate(var(--rot));
+      }
+      78% {
+        opacity: 1;
+        transform: translate(calc(19px - var(--x)), calc(15px - var(--y))) translate(-50%, -50%)
+          rotate(calc(var(--orbit-angle) + 360deg)) translateX(var(--orbit-r))
+          rotate(calc(var(--orbit-ccw) - 360deg)) scale(1) rotate(var(--rot));
+      }
+      84% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1) rotate(var(--rot));
+      }
+      100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1) rotate(var(--rot));
+      }
+    }
+
+    @keyframes sparkle-pulse {
+      0% {
+        transform: translate(-50%, -50%) scale(1) rotate(var(--rot));
+      }
+      40% {
+        transform: translate(-50%, -50%) scale(1.5) rotate(var(--rot));
+      }
+      70% {
+        transform: translate(-50%, -50%) scale(0.8) rotate(var(--rot));
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1) rotate(var(--rot));
+      }
+    }
+
     @keyframes fade-scale-in {
       0% {
         opacity: 0;
@@ -717,6 +1100,47 @@
     .rating--animate .star-fifth__sparkle--5 {
       animation: sparkle-eject 0.38s cubic-bezier(0.22, 1.3, 0.36, 1) 2.44s forwards;
     }
+
+    .screen--animate:not(.screen--four-stars) .rating--animate .star-fifth__sparkle--1 {
+      --orbit-angle: -50deg;
+      --orbit-ccw: 50deg;
+      --orbit-r: 14.4px;
+      animation:
+        sparkle-eject-orbit var(--sparkle-orbit-dur) linear var(--sparkle-delay) forwards,
+        sparkle-pulse var(--sparkle-pulse-dur) ease-in-out var(--star-sparkle-end) forwards;
+    }
+    .screen--animate:not(.screen--four-stars) .rating--animate .star-fifth__sparkle--2 {
+      --orbit-angle: -132deg;
+      --orbit-ccw: 132deg;
+      --orbit-r: 14.3px;
+      animation:
+        sparkle-eject-orbit var(--sparkle-orbit-dur) linear var(--sparkle-delay) forwards,
+        sparkle-pulse var(--sparkle-pulse-dur) ease-in-out var(--star-sparkle-end) forwards;
+    }
+    .screen--animate:not(.screen--four-stars) .rating--animate .star-fifth__sparkle--3 {
+      --orbit-angle: 154deg;
+      --orbit-ccw: -154deg;
+      --orbit-r: 15.9px;
+      animation:
+        sparkle-eject-orbit var(--sparkle-orbit-dur) linear var(--sparkle-delay) forwards,
+        sparkle-pulse var(--sparkle-pulse-dur) ease-in-out var(--star-sparkle-end) forwards;
+    }
+    .screen--animate:not(.screen--four-stars) .rating--animate .star-fifth__sparkle--4 {
+      --orbit-angle: 23deg;
+      --orbit-ccw: -23deg;
+      --orbit-r: 15.4px;
+      animation:
+        sparkle-eject-orbit var(--sparkle-orbit-dur) linear var(--sparkle-delay) forwards,
+        sparkle-pulse var(--sparkle-pulse-dur) ease-in-out var(--star-sparkle-end) forwards;
+    }
+    .screen--animate:not(.screen--four-stars) .rating--animate .star-fifth__sparkle--5 {
+      --orbit-angle: 90deg;
+      --orbit-ccw: -90deg;
+      --orbit-r: 16.5px;
+      animation:
+        sparkle-eject-orbit var(--sparkle-orbit-dur) linear var(--sparkle-delay) forwards,
+        sparkle-pulse var(--sparkle-pulse-dur) ease-in-out var(--star-sparkle-end) forwards;
+    }
     .rating--animate .rating__separator {
       animation: separator-grow 0.3s ease-out calc(var(--star-sparkle-end) + var(--border-reveal-dur) + var(--post-border-sep-gap, 0.08s)) forwards;
     }
@@ -750,13 +1174,96 @@
     }
 
     .screen--four-stars .star-fifth {
+      display: none;
+    }
+
+    /* Mobile #3 — empty fifth star (grey, pops in like stars 1–4) */
+    .screen--four-stars .rating--animate .rating__star--5.rating__star--empty {
+      animation: star-pop 0.45s cubic-bezier(0.34, 1.4, 0.64, 1) 1.6s forwards;
+    }
+
+    /* Mobile #4 — big star sits on the score card, then shrinks into fifth slot */
+    .screen--shrink-fifth {
+      --hero-star-size: 920px;
+      --hero-star-offset: calc(var(--hero-star-size) / -2);
+    }
+
+    .screen--shrink-fifth.screen--animate {
+      --fifth-shrink-start: 1.6s;
+      --hero-appear-dur: 0.16s;
+      --hero-hold-dur: 0.12s;
+      --fifth-shrink-dur: 0.82s;
+      --fifth-hero-active-dur: calc(var(--hero-appear-dur) + var(--hero-hold-dur) + var(--fifth-shrink-dur));
+      --sparkle-delay: calc(var(--fifth-shrink-start) + var(--fifth-hero-active-dur) + 0.45s);
+      --star-sparkle-end: calc(var(--sparkle-delay) + var(--sparkle-orbit-dur));
+    }
+
+    .screen--shrink-fifth .card,
+    .screen--shrink-fifth .rating {
+      overflow: visible;
+    }
+
+    .screen--shrink-fifth .card__title,
+    .screen--shrink-fifth .card__divider,
+    .screen--shrink-fifth .rating,
+    .screen--shrink-fifth .card__message {
+      z-index: 1;
+    }
+
+    /* Not in layout until JS adds --show at fifth-star time (1.6s) */
+    .screen--shrink-fifth .card > .star-fifth-hero {
+      display: none;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: var(--hero-star-size);
+      height: var(--hero-star-size);
+      margin-left: var(--hero-star-offset);
+      margin-top: var(--hero-star-offset);
+      transform-origin: center center;
+      z-index: 0;
+      pointer-events: none;
       opacity: 0;
       visibility: hidden;
     }
 
-    .screen--four-stars .rating--animate .star-fifth__core,
-    .screen--four-stars .rating--animate .star-fifth__sparkle {
+    .screen--shrink-fifth .card > .star-fifth-hero.star-fifth-hero--show {
+      display: block;
+      visibility: visible;
+      transform-origin: center center;
+      backface-visibility: hidden;
+    }
+
+    .star-fifth-hero img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    @keyframes star-fifth-core-reveal {
+      0% {
+        opacity: 0;
+        transform: scale(0.85) rotate(-8deg);
+      }
+      100% {
+        opacity: 0.9;
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
+    .screen--shrink-fifth .star-fifth__core {
+      opacity: 0;
+      transform: scale(0.85);
+    }
+
+    .screen--shrink-fifth .rating--animate .star-fifth__core {
       animation: none;
+    }
+
+    .screen--shrink-fifth.screen--animate .rating--animate .star-fifth__core.star-fifth__core--landed {
+      opacity: 0.9;
+      transform: scale(1) rotate(0deg);
+      transition: opacity 0.12s ease-out, transform 0.2s cubic-bezier(0.34, 1.15, 0.64, 1);
     }
 
     @keyframes fade-up-btn {
@@ -779,9 +1286,17 @@
       .screen--four-stars .card.card--animate {
         border-color: rgba(255, 225, 68, 0.3) !important;
       }
-      .screen--four-stars .star-fifth,
-      .screen--four-stars .star-fifth__core,
-      .screen--four-stars .star-fifth__sparkle {
+      .screen--four-stars .star-fifth {
+        display: none !important;
+      }
+      .screen--four-stars .rating__star--5.rating__star--empty {
+        opacity: 0.9 !important;
+        transform: scale(1) rotate(0) !important;
+      }
+      .screen--shrink-fifth .card > .star-fifth-hero,
+      .screen--shrink-fifth .card > .star-fifth-hero.star-fifth-hero--show {
+        display: none !important;
+        animation: none !important;
         opacity: 0 !important;
         visibility: hidden !important;
       }
@@ -835,7 +1350,10 @@
 </head>
 <body>
   <div class="preview">
-    <h1 class="preview__title" id="preview-title">Mobile #1</h1>
+    <div class="preview__header">
+      <h1 class="preview__title" id="preview-title">Mobile #1</h1>
+      <button type="button" class="preview__refresh" id="btn-refresh">Refresh</button>
+    </div>
 
     <!-- Mobile #1 — perfect score screen -->
     <div class="screen screen--visible screen--animate" data-phone="1" data-node-id="505:1375">
@@ -920,8 +1438,8 @@
       </div>
     </div>
 
-    <!-- Mobile #2 — four stars, 30% border (no fifth star / border reveal) -->
-    <div class="screen screen--four-stars" data-phone="2" data-node-id="505:1375" hidden>
+    <!-- Mobile #4 — perfect score with giant fifth star shrink (Figma 505:1375) -->
+    <div class="screen screen--shrink-fifth" data-phone="4" data-node-id="505:1375" hidden>
       <div class="screen-inner">
         <div class="screen__chevron screen__chevron--top" aria-hidden="true">
           <img src="assets/chevron-top.png" alt="" width="288" height="852" />
@@ -930,10 +1448,13 @@
           <img src="assets/chevron-bottom.png" alt="" width="288" height="852" />
         </div>
         <main class="screen__content">
-          <article class="card card--animate" data-node-id="505:1388">
+          <article class="card" data-node-id="505:1388">
+            <div class="star-fifth-hero" aria-hidden="true">
+              <img src="assets/star.svg" alt="" />
+            </div>
             <h1 class="card__title" data-node-id="505:1390">Reviving a cold lead</h1>
             <div class="card__divider" role="presentation" data-node-id="505:1391"></div>
-            <div class="rating rating--animate" data-node-id="505:1392" aria-label="Rating animating to 4 stars">
+            <div class="rating" data-node-id="505:1392" aria-label="Rating animating to 5 stars">
               <div class="rating__star rating__star--1" aria-hidden="true">
                 <img src="assets/star.svg" alt="" />
               </div>
@@ -946,7 +1467,7 @@
               <div class="rating__star rating__star--4" aria-hidden="true">
                 <img src="assets/star.svg" alt="" />
               </div>
-              <div class="star-fifth" aria-hidden="true" data-node-id="505:1484" hidden>
+              <div class="star-fifth" aria-hidden="true" data-node-id="505:1484">
                 <div class="star-fifth__core">
                   <img src="assets/star.svg" alt="" />
                 </div>
@@ -972,7 +1493,52 @@
       </div>
     </div>
 
-    <!-- Mobile #3 — Animated evaluation modules (Figma 507:1512) -->
+    <!-- Mobile #3 — four stars + empty grey fifth (30% border, no border reveal) -->
+    <div class="screen screen--four-stars" data-phone="2" data-node-id="505:1375" hidden>
+      <div class="screen-inner">
+        <div class="screen__chevron screen__chevron--top" aria-hidden="true">
+          <img src="assets/chevron-top.png" alt="" width="288" height="852" />
+        </div>
+        <div class="screen__chevron screen__chevron--bottom" aria-hidden="true">
+          <img src="assets/chevron-bottom.png" alt="" width="288" height="852" />
+        </div>
+        <main class="screen__content">
+          <article class="card card--animate" data-node-id="505:1388">
+            <h1 class="card__title" data-node-id="505:1390">Reviving a cold lead</h1>
+            <div class="card__divider" role="presentation" data-node-id="505:1391"></div>
+            <div class="rating rating--animate" data-node-id="505:1392" aria-label="Rating animating to 4 stars">
+              <div class="rating__star rating__star--1" aria-hidden="true">
+                <img src="assets/star.svg" alt="" />
+              </div>
+              <div class="rating__star rating__star--2" aria-hidden="true">
+                <img src="assets/star.svg" alt="" />
+              </div>
+              <div class="rating__star rating__star--3" aria-hidden="true">
+                <img src="assets/star.svg" alt="" />
+              </div>
+              <div class="rating__star rating__star--4" aria-hidden="true">
+                <img src="assets/star.svg" alt="" />
+              </div>
+              <div class="rating__star rating__star--5 rating__star--empty" aria-hidden="true" data-node-id="505:1484">
+                <img src="assets/star-empty.svg" alt="" />
+              </div>
+              <span class="rating__separator" aria-hidden="true" data-node-id="505:1397"></span>
+              <div class="rating__check" data-node-id="505:1398">
+                <img src="assets/check.svg" alt="Completed" />
+              </div>
+            </div>
+            <p class="card__message" data-node-id="505:1389">
+              Congrats on getting all the stars! Keep up the good work!
+            </p>
+          </article>
+          <button type="button" class="btn-feedback" data-node-id="505:1419">
+            View personalized feedback
+          </button>
+        </main>
+      </div>
+    </div>
+
+    <!-- Mobile #4 — Animated evaluation modules (Figma 507:1512) -->
     <div class="screen" data-phone="3" data-node-id="507:1512" hidden>
       <div class="screen-inner">
         <div class="screen__chevron screen__chevron--top" aria-hidden="true">
@@ -1043,6 +1609,51 @@
       </div>
     </div>
 
+    <!-- Mobile #5 — Hold to talk (Figma 521:839) -->
+    <div class="screen" data-phone="5" data-node-id="521:839" hidden>
+      <div class="screen-inner screen-inner--talk">
+        <div class="talk">
+          <img class="talk__bg" src="assets/talk-bg.jpg" alt="" data-node-id="521:840" />
+          <div class="talk__gradient talk__gradient--bottom" aria-hidden="true"></div>
+
+          <button type="button" class="talk__back" aria-label="Back">
+            <img src="assets/talk-back.svg" alt="" />
+          </button>
+          <div class="talk__hint" aria-hidden="true">
+            <span class="talk__hint-dot"></span>
+          </div>
+
+          <p class="talk__bubble talk__bubble--alex" data-node-id="521:871">
+            <strong>Alex:</strong> Nah im good, just the coffee for me. Gotta watch the waistline, you know?
+          </p>
+          <p class="talk__bubble talk__bubble--you" data-node-id="521:873">
+            <strong>You:</strong> Your coffee will only take a moment. While we wait
+            <span class="talk__bubble-emphasis"> I can tempt you with a Danish bundle only 2.49</span>
+            with the coffee
+          </p>
+
+          <div class="talk__dots" aria-hidden="true" data-node-id="521:874">
+            <span class="talk__dot"><span class="talk__dot-inner"></span></span>
+            <span class="talk__dot talk__dot--inactive"><span class="talk__dot-inner"></span></span>
+          </div>
+
+          <div class="talk__mic-wrap">
+            <button type="button" class="talk__mic" aria-label="Hold to talk" data-node-id="521:866">
+              <img src="assets/talk-mic.svg" alt="" />
+            </button>
+            <span class="talk__mic-label" data-node-id="521:861">Hold to talk</span>
+          </div>
+
+          <button type="button" class="talk__fab talk__fab--keyboard" aria-label="Keyboard">
+            <img src="assets/talk-keyboard.svg" alt="" />
+          </button>
+          <button type="button" class="talk__fab talk__fab--info" aria-label="Info" data-node-id="521:863">
+            <img src="assets/talk-info.svg" alt="" />
+          </button>
+        </div>
+      </div>
+    </div>
+
     <nav class="preview__nav" aria-label="Mobile preview navigation">
       <button type="button" class="preview__btn" id="btn-back" disabled>Back</button>
       <button type="button" class="preview__btn" id="btn-next">Next</button>
@@ -1055,12 +1666,141 @@
     const backBtn = document.getElementById("btn-back");
     const nextBtn = document.getElementById("btn-next");
     let currentIndex = 0;
+    let shrinkFifthHeroTimer = null;
+    const FIFTH_STAR_DELAY_MS = 1600;
+
+    const HERO_APPEAR_MS = 160;
+    const HERO_HOLD_MS = 120;
+    const HERO_SHRINK_MS = 820;
+
+    function cancelHeroAnimations(hero) {
+      hero?.getAnimations?.().forEach((a) => a.cancel());
+    }
+
+    function measureHeroShrinkTarget(phone, hero) {
+      const target = phone.querySelector(".star-fifth__core") || phone.querySelector(".star-fifth");
+      if (!target || !hero) return null;
+      const t = target.getBoundingClientRect();
+      const h = hero.getBoundingClientRect();
+      if (!h.width || !t.width) return null;
+      return {
+        tx: t.left + t.width / 2 - (h.left + h.width / 2),
+        ty: t.top + t.height / 2 - (h.top + h.height / 2),
+        scale: t.width / h.width,
+      };
+    }
+
+    function landFifthStarCore(phone) {
+      const core = phone.querySelector(".star-fifth__core");
+      if (core) core.classList.add("star-fifth__core--landed");
+    }
+
+    function resetShrinkFifthHero(phone) {
+      if (shrinkFifthHeroTimer) {
+        clearTimeout(shrinkFifthHeroTimer);
+        shrinkFifthHeroTimer = null;
+      }
+      if (phone?._heroHoldTimer) {
+        clearTimeout(phone._heroHoldTimer);
+        phone._heroHoldTimer = null;
+      }
+      phone?._heroAppearAnim?.cancel();
+      phone?._heroShrinkAnim?.cancel();
+      phone._heroAppearAnim = null;
+      phone._heroShrinkAnim = null;
+      const hero = phone?.querySelector(".star-fifth-hero");
+      cancelHeroAnimations(hero);
+      if (hero) {
+        hero.style.transform = "";
+        hero.classList.remove("star-fifth-hero--show");
+      }
+      phone?.querySelector(".star-fifth__core")?.classList.remove("star-fifth__core--landed");
+    }
+
+    function runHeroShrink(phone, hero) {
+      const metrics = measureHeroShrinkTarget(phone, hero);
+      if (!metrics || !phone.classList.contains("screen--animate")) return;
+
+      cancelHeroAnimations(hero);
+      hero.style.transform = "translate(0px, 0px) scale(1)";
+
+      phone._heroShrinkAnim = hero.animate(
+        [
+          { opacity: 1, transform: "translate(0px, 0px) scale(1)" },
+          {
+            opacity: 1,
+            transform: `translate(${metrics.tx}px, ${metrics.ty}px) scale(${metrics.scale})`,
+          },
+        ],
+        {
+          duration: HERO_SHRINK_MS,
+          easing: "cubic-bezier(0.25, 0.9, 0.35, 1)",
+          fill: "forwards",
+        }
+      );
+
+      phone._heroShrinkAnim.onfinish = () => {
+        phone._heroShrinkAnim = null;
+        if (!phone.classList.contains("screen--animate")) return;
+        hero.classList.remove("star-fifth-hero--show");
+        hero.style.transform = "";
+        landFifthStarCore(phone);
+      };
+    }
+
+    function playShrinkFifthHero(phone) {
+      const hero = phone?.querySelector(".star-fifth-hero");
+      if (!hero || !phone.classList.contains("screen--animate")) return;
+
+      cancelHeroAnimations(hero);
+      hero.classList.add("star-fifth-hero--show");
+      hero.style.transform = "scale(0.9)";
+
+      phone._heroAppearAnim = hero.animate(
+        [
+          { opacity: 0, transform: "scale(0.9)" },
+          { opacity: 1, transform: "scale(1)" },
+        ],
+        {
+          duration: HERO_APPEAR_MS,
+          easing: "cubic-bezier(0.34, 1.2, 0.64, 1)",
+          fill: "forwards",
+        }
+      );
+
+      phone._heroAppearAnim.onfinish = () => {
+        phone._heroAppearAnim = null;
+        if (!phone.classList.contains("screen--animate")) return;
+        hero.style.transform = "translate(0px, 0px) scale(1)";
+        phone._heroHoldTimer = setTimeout(() => {
+          phone._heroHoldTimer = null;
+          requestAnimationFrame(() => runHeroShrink(phone, hero));
+        }, HERO_HOLD_MS);
+      };
+    }
+
+    function resetAllShrinkFifthHeroes() {
+      phones.forEach((phone) => resetShrinkFifthHero(phone));
+    }
+
+    function scheduleShrinkFifthHero(phone) {
+      resetShrinkFifthHero(phone);
+      if (!phone?.querySelector(".star-fifth-hero")) return;
+      shrinkFifthHeroTimer = setTimeout(() => {
+        shrinkFifthHeroTimer = null;
+        playShrinkFifthHero(phone);
+      }, FIFTH_STAR_DELAY_MS);
+    }
 
     function replayPerfectScore(phoneIndex) {
       const phone = phones[phoneIndex];
       const rating = phone?.querySelector(".rating");
       const card = phone?.querySelector(".card");
       if (!rating || !card) return;
+
+      if (phone.classList.contains("screen--shrink-fifth")) {
+        resetShrinkFifthHero(phone);
+      }
 
       rating.classList.remove("rating--animate");
       card.classList.remove("card--animate");
@@ -1069,9 +1809,25 @@
       phone.classList.add("screen--animate");
       card.classList.add("card--animate");
       rating.classList.add("rating--animate");
+
+      if (phone.classList.contains("screen--shrink-fifth")) {
+        scheduleShrinkFifthHero(phone);
+      }
     }
 
+    function refreshCurrentScreen() {
+      const index = currentIndex;
+      if (index === 0 || index === 1 || index === 2) {
+        replayPerfectScore(index);
+      } else if (index === 3) {
+        replayEvalModulesAnimation();
+      }
+    }
+
+    document.getElementById("btn-refresh")?.addEventListener("click", refreshCurrentScreen);
+
     function showPhone(index) {
+      resetAllShrinkFifthHeroes();
       currentIndex = index;
       phones.forEach((phone, i) => {
         const visible = i === index;
@@ -1082,15 +1838,15 @@
       backBtn.disabled = index === 0;
       nextBtn.disabled = index === phones.length - 1;
 
-      if (index === 0 || index === 1) {
+      if (index === 0 || index === 1 || index === 2) {
         replayPerfectScore(index);
-      } else if (index === 2) {
+      } else if (index === 3) {
         replayEvalModulesAnimation();
       }
     }
 
     function replayEvalModulesAnimation() {
-      const cards = phones[2]?.querySelectorAll(".eval-card");
+      const cards = phones[3]?.querySelectorAll(".eval-card");
       if (!cards?.length) return;
       cards.forEach((card) => card.classList.remove("eval-card--animate"));
       void cards[0].offsetWidth;
@@ -1105,14 +1861,14 @@
       if (currentIndex < phones.length - 1) showPhone(currentIndex + 1);
     });
 
-    [0, 1].forEach((i) => {
+    [0, 1, 2].forEach((i) => {
       const rating = phones[i]?.querySelector(".rating");
       if (rating) {
         rating.addEventListener("click", () => replayPerfectScore(i));
       }
     });
 
-    phones[2]?.querySelectorAll(".eval-card").forEach((card) => {
+    phones[3]?.querySelectorAll(".eval-card").forEach((card) => {
       card.addEventListener("click", replayEvalModulesAnimation);
     });
   </script>
